@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Archivo", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-space: #080B18;
+  --color-midnight: #111A35;
+  --color-electric: #2563EB;
+  --color-violet: #8B5CF6;
+  --color-cyan: #22D3EE;
+  --color-ice: #F4F7FF;
+  --color-muted: #A5B1CC;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background-color: #080B18;
+    color: #F4F7FF;
+    scroll-padding-top: 5rem;
+  }
+
+  h1, h2, h3, h4, .font-display {
+    font-family: var(--font-display);
+  }
+
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@keyframes ticker-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes gradient-pan {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-ticker {
+  animation: ticker-scroll 28s linear infinite;
+}
+
+.animate-ticker:hover {
+  animation-play-state: paused;
+}
+
+.text-gradient-kinetic {
+  background-image: linear-gradient(110deg, #2563EB 0%, #22D3EE 45%, #8B5CF6 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-pan 7s ease infinite;
+}
+
+.bg-tech-grid {
+  background-image:
+    linear-gradient(to right, rgba(244, 247, 255, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(244, 247, 255, 0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-ticker,
+  .text-gradient-kinetic {
+    animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Custom pointer cursor hides native cursor only when custom cursor is active on fine pointer devices */
+@media (hover: hover) and (pointer: fine) {
+  body.has-custom-cursor,
+  body.has-custom-cursor a,
+  body.has-custom-cursor button {
+    cursor: none;
+  }
+}
